@@ -1,0 +1,56 @@
+flow-nodes:
+  ms-teams-webhook:
+    name: MS Teams Webhook
+    icon: icon.png
+    description: Flow-node to say send a message to a MS Team Webhook.
+    category: Messaging
+    methods:
+      sendMsg: # This same key is used in `actions.js`
+        name: Send Simple Message
+        description: Sends a simple message with a title and text.
+        parameters:
+          url:
+            name: URL
+            description: The url of the MS Teams Incoming Webhook.
+            required: true
+            initialType: string
+            schema:
+              type: string
+          title:
+            name: Message title
+            description: The title of the message.
+            required: true
+            initialType: string
+            schema:
+              type: string
+          summary:
+            name: Message summary
+            description: The summary of the message.
+            required: true
+            initialType: string
+            schema:
+              type: string
+          text:
+            name: Message text
+            description: The body of the message.
+            required: true
+            initialType: string
+            schema:
+              type: string
+        # "Next" (next) output
+        returns:
+          name: Next
+          description: The operation was successful.
+          context: $.sendmsgoutput
+          schema:
+            type: string
+        # "Error" (error) output
+        throws:
+          name: Error
+          description: An unexpected error was encountered.
+          context: $.sendmsgerror
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
