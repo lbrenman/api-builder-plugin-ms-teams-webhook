@@ -53,7 +53,21 @@ async function sendMsg(params, options) {
     }]
   }
 
-	return sendMsgAsync(JSON.stringify(card));
+	// return sendMsgAsync(JSON.stringify(card));
+
+  try {
+    const whResponse = sendMsgAsync(JSON.stringify(card));
+  } catch(error) {
+    logger.error(error);
+    if (error.response) {
+      throw new Error(error.response.body)
+    } else {
+      throw new Error('Failed to send message')
+    }
+
+  }
+
+  return {success: true}
 }
 
 module.exports = {
