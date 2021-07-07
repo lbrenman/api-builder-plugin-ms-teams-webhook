@@ -55,7 +55,7 @@ async function sendMsg(params, options) {
     });
 
   } catch(error) {
-    throw new Error({success: false, message: error});
+    throw new Error(error);
   }
 
   return {success: true}
