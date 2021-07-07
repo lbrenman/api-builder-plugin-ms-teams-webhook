@@ -47,8 +47,6 @@ async function sendMsg(params, options) {
     }]
   }
 
-  let response = {};
-
   try {
      await axios({
       method: 'post',
@@ -56,13 +54,11 @@ async function sendMsg(params, options) {
       data: card
     });
 
-    response = {success: true};
-
   } catch(error) {
-    throw new Error(error);
+    throw new Error({success: false, message: error});
   }
 
-  return response
+  return {success: true}
 
 }
 
