@@ -53,23 +53,13 @@ async function sendMsg(params, options) {
      await axios({
       method: 'post',
       url: url,
-      data: JSON.stringify({
-        "@type": "MessageCard",
-        "@context": "https://schema.org/extensions",
-        "summary": summary,
-        "themeColor": "0078D7",
-        "title": title,
-        "sections": [{
-          "text": text
-        }]
-      })
+      data: card
     });
 
     response = {success: true};
 
   } catch(error) {
     throw new Error(error);
-    response = {success: false, error: error};
   }
 
   return response
@@ -77,5 +67,5 @@ async function sendMsg(params, options) {
 }
 
 module.exports = {
-	sendMsg
+  sendMsg
 };
