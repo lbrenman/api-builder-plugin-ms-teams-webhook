@@ -47,18 +47,13 @@ async function sendMsg(params, options) {
     }]
   }
 
-  try {
-     await axios({
-      method: 'post',
-      url: url,
-      data: card
-    });
+  await axios({
+   method: 'post',
+   url: url,
+   data: card
+   });
 
-  } catch(error) {
-    throw new Error(error);
-  }
-
-  return {success: true}
+  return;
 
 }
 
