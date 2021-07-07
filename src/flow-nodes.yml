@@ -54,3 +54,38 @@ flow-nodes:
             properties:
               message:
                 type: string
+      sendMsgFull: # This same key is used in `actions.js`
+        name: Send Message (Full)
+        description: Sends a custom card.
+        parameters:
+          url:
+            name: URL
+            description: The url of the MS Teams Incoming Webhook.
+            required: true
+            initialType: string
+            schema:
+              type: string
+          card:
+            name: Card
+            description: MS Team Card.
+            required: true
+            initialType: object
+            schema:
+              type: object
+        # "Next" (next) output
+        returns:
+          name: Next
+          description: The operation was successful.
+          context: $.sendmsgfulloutput
+          schema:
+            type: string
+        # "Error" (error) output
+        throws:
+          name: Error
+          description: An unexpected error was encountered.
+          context: $.sendmsgfullerror
+          schema:
+            type: object
+            properties:
+              message:
+                type: string

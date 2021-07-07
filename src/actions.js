@@ -57,6 +57,27 @@ async function sendMsg(params, options) {
 
 }
 
+async function sendMsgFull(params, options) {
+	const { url, card } = params;
+	const { logger } = options;
+	if (!url) {
+		throw new Error('Missing required parameter: url');
+	}
+  if (!card) {
+		throw new Error('Missing required parameter: title');
+	}
+
+  await axios({
+   method: 'post',
+   url: url,
+   data: card
+   });
+
+  return;
+
+}
+
 module.exports = {
-  sendMsg
+  sendMsg,
+  sendMsgFull
 };
