@@ -1,5 +1,4 @@
-const util = require('util');
-const { IncomingWebhook } = require('ms-teams-webhook');
+const axios = require('axios');
 
 /**
  * Action method.
@@ -37,11 +36,6 @@ async function sendMsg(params, options) {
 		throw new Error('Missing required parameter: text');
 	}
 
-  const webhook = new IncomingWebhook(url);
-
-  const sendMsgAsync = util.promisify(webhook.send)
-      .bind(webhook);
-
   let card = {
     "@type": "MessageCard",
     "@context": "https://schema.org/extensions",
@@ -53,21 +47,33 @@ async function sendMsg(params, options) {
     }]
   }
 
-	// return sendMsgAsync(JSON.stringify(card));
+  let response = {};
 
   try {
-    const whResponse = sendMsgAsync(JSON.stringify(card));
-  } catch(error) {
-    logger.error(error);
-    if (error.response) {
-      throw new Error(error.response.body)
-    } else {
-      throw new Error('Failed to send message')
-    }
+     await axios({
+      method: 'post',
+      url: url,
+      data: JSON.stringify({
+        "@type": "MessageCard",
+        "@context": "https://schema.org/extensions",
+        "summary": summary,
+        "themeColor": "0078D7",
+        "title": title,
+        "sections": [{
+          "text": text
+        }]
+      })
+    });
 
+    response = {success: true};
+
+  } catch(error) {
+    throw new Error(error);
+    response = {success: false, error: error};
   }
 
-  return {success: true}
+  return response
+
 }
 
 module.exports = {
