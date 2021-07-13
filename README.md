@@ -28,7 +28,7 @@ In order to use the plugin, you will need the incoming webhook URL for the MS Te
 
 Find the plugin in the Messaging group in the Flow-Nodes panel. Drag onto the canvas and select the desired method and provide the input and wire up to the rest of your flow as shown below:
 
-![](https://i.imgur.com/qOMpFFd.png)
+![](https://i.imgur.com/sJuD6gD.png)
 
 ## Methods
 
